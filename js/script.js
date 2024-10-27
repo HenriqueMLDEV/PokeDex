@@ -26,7 +26,7 @@ const renderPokemon = async (pokemon) => {
 
   const data = await fetchPokemon(pokemon);
 
-  if (data) {
+  if (data && searchPokemon < 650) {
     pokemonImage.style.display = "block";
     pokemonName.innerHTML = data.name;
     pokemonNumber.innerHTML = data.id;
@@ -34,6 +34,14 @@ const renderPokemon = async (pokemon) => {
       data["sprites"]["versions"]["generation-v"]["black-white"]["animated"][
         "front_default"
       ];
+    input.value = "";
+    searchPokemon = data.id;
+  } else if (data && searchPokemon >= 650) {
+    pokemonImage.style.display = "block";
+    pokemonName.innerHTML = data.name;
+    pokemonNumber.innerHTML = data.id;
+    pokemonImage.src =
+      data["sprites"]["versions"]["generation-vi"]["x-y"]["front_default"];
     input.value = "";
     searchPokemon = data.id;
   } else {
